@@ -1,1 +1,123 @@
+/* stylelint-disable no-descending-specificity */
+
 /* add global styles that can be loaded post LCP here */
+
+/* ===== Tabs section style ===== */
+
+/* --- Local design tokens --- */
+.tabs-container {
+  --tabs-accent: var(--accent-color, rgb(232 101 26));
+  --tabs-text: var(--dark-color, rgb(15 26 20));
+  --tabs-muted: var(--text-color-muted, rgb(122 138 128));
+  --tabs-inactive: var(--border-color, rgb(200 194 184));
+
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--section-padding);
+  padding-inline: var(--gap-lg);
+}
+
+/* Section heading above tabs */
+.tabs-container > .default-content-wrapper {
+  margin-bottom: var(--gap-xl);
+}
+
+.tabs-container > .default-content-wrapper h2 {
+  margin: 0 0 var(--gap-xs);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xl, 40px);
+  font-weight: 700;
+  color: var(--tabs-text);
+}
+
+/* --- Tab navigation --- */
+.tabs-container .tabs-list {
+  position: relative;
+  display: flex;
+  gap: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  border-top: 2px solid var(--tabs-text);
+  padding-top: var(--gap-xs);
+  padding-bottom: 4px;
+  margin-bottom: var(--gap-lg);
+}
+
+.tabs-container .tabs-list button {
+  flex: 0 0 max-content;
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: var(--gap-sm) var(--gap-xl) var(--gap-sm) 0;
+  background: none;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--tabs-inactive);
+  cursor: pointer;
+  letter-spacing: -0.2px;
+  line-height: 1.1;
+  white-space: nowrap;
+  box-shadow: none;
+  transition: color 0.25s ease;
+}
+
+.tabs-container .tabs-list button p {
+  margin: 0;
+  color: inherit;
+}
+
+/* Active tab: dark text + accent underline (CSS default until JS takes over) */
+.tabs-container .tabs-list button[aria-selected='true'] {
+  color: var(--tabs-text);
+  box-shadow: inset 0 -4px 0 var(--tabs-accent);
+}
+
+/* Once a tab is clicked, JS indicator handles the underline */
+.tabs-container .tabs-list.tabs-animated button[aria-selected='true'] {
+  box-shadow: none;
+}
+
+.tabs-container .tabs-list button:hover {
+  color: var(--tabs-muted);
+}
+
+.tabs-container .tabs-list button[aria-selected='true']:hover {
+  color: var(--tabs-text);
+}
+
+/* --- Sliding indicator (activated on first click via .tabs-animated) --- */
+.tabs-container .tabs-indicator {
+  position: absolute;
+  bottom: 0;
+  height: 4px;
+  background-color: var(--tabs-accent);
+  border-radius: 2px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.tabs-container .tabs-animated .tabs-indicator {
+  opacity: 1;
+}
+
+/* --- Tab panels (each is a section) --- */
+.tabs-container .tabs-panel {
+  padding: 0;
+  margin-top: var(--gap-md);
+}
+
+.tabs-container .tabs-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* Remove section padding from panels — container handles it */
+.tabs-container .section.tabs-panel {
+  padding: 0;
+}
+
+@media (width >= 768px) {
+  .tabs-container .tabs-list button {
+    font-size: 20px;
+  }
+}

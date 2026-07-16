@@ -1,0 +1,46 @@
+/*
+ * Wells Fargo brand tokens
+ * Extracted from https://www.wellsfargo.com/ (see migration-work/brand.json)
+ *
+ * Wells Fargo Sans is a proprietary typeface (not available via Typekit or
+ * Google Fonts), so the font stack resolves to an Arial/Helvetica system
+ * fallback. The WF family names are kept first so licensed environments that
+ * have the fonts installed render them natively.
+ */
+
+:root {
+  /* fonts */
+  --heading-font-family: "Wells Fargo Sans SemiBold", arial, helvetica, sans-serif;
+  --body-font-family: "Wells Fargo Sans Regular", arial, helvetica, sans-serif;
+  --button-font-family: "Wells Fargo Sans SemiBold", arial, helvetica, sans-serif;
+
+  /* brand colors */
+  --background-color: #fff;
+  --text-color: #141414;
+  --text-color-subtle: #433a38;
+  --text-color-muted: #787070;
+  --accent-color: #d71e28;
+  --brand-red: #d71e28;
+  --brand-red-dark: #b31118;
+  --light-color: #f9f7f6;
+  --dark-color: #141414;
+  --border-color: #d8d2d0;
+  --border-color-light: #e6e1df;
+
+  /* links */
+  --link-color: #5a469b;
+  --link-hover-color: #3d2f6b;
+
+  /* spacing */
+  --section-padding: 48px 0;
+  --container-max-width: 1200px;
+  --nav-height: 67px;
+
+  /* heading sizes */
+  --heading-size-xxl: 34px;
+  --heading-size-xl: 35px;
+  --heading-size-l: 26px;
+  --heading-size-m: 20px;
+  --heading-size-s: 18px;
+  --heading-size-xs: 16px;
+}

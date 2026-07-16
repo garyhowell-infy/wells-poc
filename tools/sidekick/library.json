@@ -1,0 +1,32 @@
+{
+  ":version": 3,
+  ":type": "multi-sheet",
+  "blocks": {
+    "data": [
+      { "name": "Hero", "path": "/tools/sidekick/blocks/hero", "description": "Full-bleed overlay hero with eyebrow, heading, body text, and CTA buttons" },
+      { "name": "Hero (article)", "path": "/tools/sidekick/blocks/hero-article", "description": "Blog article hero with tag pills, author avatar, name, and date" },
+      { "name": "Featured Article", "path": "/tools/sidekick/blocks/featured-article", "description": "Image + content side-by-side with tag pill, heading, description, and CTA" },
+      { "name": "Cards (cards-article)", "path": "/tools/sidekick/blocks/cards-article", "description": "Image + body article cards in a responsive grid" },
+      { "name": "Cards (cards-feature)", "path": "/tools/sidekick/blocks/cards-feature", "description": "Text-only glass cards for values or features (use in dark sections)" },
+      { "name": "Columns (columns-about)", "path": "/tools/sidekick/blocks/columns-about", "description": "Text + image two-column layout for about-style content" },
+      { "name": "Columns (columns-promo)", "path": "/tools/sidekick/blocks/columns-promo", "description": "Side-by-side promo cards with eyebrow, heading, description, and ghost button" },
+      { "name": "Columns (columns-pullquote)", "path": "/tools/sidekick/blocks/columns-pullquote", "description": "Gear list + dark pull-quote panel (used in blog articles)" },
+      { "name": "Editorial Index", "path": "/tools/sidekick/blocks/editorial-index", "description": "Numbered list items with large accent numbers and content" },
+      { "name": "Gallery", "path": "/tools/sidekick/blocks/gallery", "description": "Photo grid with optional wide bottom image (use in dark sections)" },
+      { "name": "FAQ List", "path": "/tools/sidekick/blocks/faq-list", "description": "Expandable FAQ accordion with animated open/close" },
+      { "name": "Ticker", "path": "/tools/sidekick/blocks/ticker", "description": "Horizontal scrolling tag ticker strip" },
+      { "name": "Team Profile", "path": "/tools/sidekick/blocks/team-profile", "description": "Circular avatar + name + bio layout (typically inside tabs)" },
+      { "name": "Tabs", "path": "/tools/sidekick/blocks/tabs", "description": "Tabbed content — consecutive sections with style: tabs are grouped automatically" }
+    ]
+  },
+  "sections": {
+    "data": [
+      { "name": "Dark Section", "path": "/tools/sidekick/sections/dark", "description": "Dark green background with white text and amber accents" },
+      { "name": "Accent Section", "path": "/tools/sidekick/sections/accent", "description": "Orange background with dark text" },
+      { "name": "Secondary Section", "path": "/tools/sidekick/sections/secondary", "description": "Warm beige background" },
+      { "name": "Dark + Narrow", "path": "/tools/sidekick/sections/dark-narrow", "description": "Dark section with narrow content width (768px)" },
+      { "name": "Accent + Center", "path": "/tools/sidekick/sections/accent-center", "description": "Orange centered CTA section with buttons" },
+      { "name": "Dark + Center", "path": "/tools/sidekick/sections/dark-center", "description": "Dark centered CTA section with buttons" }
+    ]
+  }
+}

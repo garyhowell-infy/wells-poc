@@ -33,6 +33,11 @@ header nav a:any-link {
   color: inherit;
 }
 
+/* Mobile-only utility links inside the drawer (hidden on desktop). */
+header .nav-utility-mobile {
+  display: none;
+}
+
 /* ---------- Row 0: brand / utility bar (red) ---------- */
 header .nav-brand-bar {
   display: flex;
@@ -40,8 +45,9 @@ header .nav-brand-bar {
   justify-content: space-between;
   gap: var(--gap-md);
   background-color: var(--brand-red, #d71e28);
-  padding: 0 24px;
-  min-height: 56px;
+  border-bottom: 4px solid var(--brand-gold, #ffcd41);
+  padding: 0 40px;
+  min-height: 75px;
 }
 
 header .nav-logo {
@@ -52,8 +58,9 @@ header .nav-logo {
 
 header .nav-logo img {
   display: block;
-  height: 22px;
+  height: 23px;
   width: auto;
+  padding: 6px 6px 6px 0;
 }
 
 header .nav-utility {
@@ -63,13 +70,19 @@ header .nav-utility {
 }
 
 header .nav-utility li {
-  display: flex;
+  display: inline;
+}
+
+header .nav-utility li.nav-utility-search,
+header .nav-utility li.nav-utility-cta {
+  display: inline-flex;
   align-items: center;
 }
 
 header .nav-utility a:any-link {
+  display: inline;
   color: #fff;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.2;
   transition: opacity var(--transition-fast);
 }
@@ -79,17 +92,40 @@ header .nav-utility a:hover {
   text-decoration: underline;
 }
 
-/* Sign On pill button */
+/* Search icon control */
+header .nav-utility-search a:any-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+}
+
+header .nav-utility-search a::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='black' stroke-width='2' d='M10 4a6 6 0 1 0 0 12A6 6 0 0 0 10 4zm5 11 5 5'/%3E%3C/svg%3E") no-repeat center / contain;
+}
+
+header .nav-utility-search a:hover { opacity: 0.85; }
+
+/* Sign On pill button — white fill, dark text (matches source) */
 header .nav-utility-cta a:any-link {
+  background-color: #fff;
+  color: var(--text-color-subtle, #3b3331);
   border: 1px solid #fff;
   border-radius: 24px;
-  padding: 7px 22px;
+  padding: 10px 22px;
+  font-size: 15px;
   font-family: var(--heading-font-family);
-  transition: background-color var(--transition-fast), color var(--transition-fast);
+  transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
 }
 
 header .nav-utility-cta a:hover {
-  background-color: #fff;
+  background-color: rgb(255 255 255 / 90%);
   color: var(--brand-red, #d71e28);
   opacity: 1;
   text-decoration: none;
@@ -120,7 +156,7 @@ header .nav-sections-list a:any-link {
   padding: 18px 0;
   color: var(--text-color);
   font-size: 16px;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -157,7 +193,7 @@ header .nav-subnav-list a:any-link {
   padding: 14px 0;
   color: var(--text-color-subtle);
   font-size: 15px;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
   transition: color var(--transition-fast), border-color var(--transition-fast);
 }
 
@@ -221,12 +257,18 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
 
 /* ---------- Mobile layout (< 1024px) ---------- */
 @media (width < 1024px) {
+  header .nav-brand-bar {
+    order: 0;
+    padding: 0 16px;
+    min-height: 60px;
+  }
+
   header .nav-hamburger {
     display: block;
     order: 2;
   }
 
-  /* Brand bar on mobile: logo (left), hamburger + Sign On (right). */
+  /* Brand bar on mobile: logo (left), Sign On + hamburger (right). */
   header .nav-logo { order: 0; }
 
   header .nav-utility {
@@ -240,9 +282,18 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
     display: none;
   }
 
+  /* Drawer overlays page content from below the brand bar. */
   header .nav-menu {
     display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    max-height: calc(100vh - 60px);
+    overflow: hidden auto;
     background-color: #fff;
+    box-shadow: 0 8px 16px rgb(0 0 0 / 15%);
   }
 
   header nav[aria-expanded='true'] .nav-menu {
@@ -266,20 +317,75 @@ header nav[aria-expanded='true'] .nav-hamburger-icon::after {
   header .nav-sections-list > li,
   header .nav-subnav-list > li {
     width: 100%;
-    border-bottom: 1px solid var(--border-color-light);
+    border-bottom: 1px solid #b5adad;
   }
 
   header .nav-sections-list a:any-link,
   header .nav-subnav-list a:any-link {
+    display: flex;
+    align-items: center;
     width: 100%;
-    padding: 14px 24px;
+    padding: 16px;
     border-bottom: 0;
+    color: var(--text-color-subtle);
     font-size: 16px;
     font-weight: 600;
   }
 
+  /* Active top-level section gets the gold header bar (matches source). */
+  header .nav-sections-list .nav-active {
+    background-color: var(--brand-gold, #ffcd41);
+  }
+
+  header .nav-sections-list .nav-active a:any-link {
+    color: var(--text-color);
+    border-bottom: 0;
+  }
+
+  /* Contextual sub-nav renders as the active section's cream accordion panel. */
   header .nav-subnav {
-    background-color: var(--light-color);
+    background-color: #fdf6e9;
+  }
+
+  header .nav-subnav-list a:any-link {
+    justify-content: space-between;
+    padding: 16px 16px 16px 24px;
+    font-weight: 400;
+  }
+
+  /* Red chevron on each sub-nav item. */
+  header .nav-subnav-list a::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid var(--brand-red, #d71e28);
+    border-top: 2px solid var(--brand-red, #d71e28);
+    transform: rotate(45deg);
+  }
+
+  /* Mobile utility links at the bottom of the drawer. */
+  header .nav-utility-mobile {
+    display: block;
+  }
+
+  header .nav-utility-mobile-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  header .nav-utility-mobile-list li {
+    display: block;
+    width: 100%;
+    border-bottom: 1px solid #b5adad;
+  }
+
+  header .nav-utility-mobile-list a:any-link {
+    display: block;
+    width: 100%;
+    padding: 16px;
+    color: var(--text-color-subtle);
+    font-size: 16px;
   }
 }
 

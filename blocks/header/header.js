@@ -62,21 +62,37 @@ export default async function decorate(block) {
     const utility = brandSection.querySelector('ul');
     if (utility) {
       utility.className = 'nav-utility';
-      // Mark the Sign On link (last utility item) as a pill button.
       const items = [...utility.querySelectorAll('li')];
-      const signOn = items[items.length - 1];
-      if (signOn && /sign on/i.test(signOn.textContent)) {
-        signOn.classList.add('nav-utility-cta');
-      }
-      brand.append(utility);
+      items.forEach((li) => {
+        const link = li.querySelector('a');
+        // Mark the Sign On link as a pill button.
+        if (/sign on/i.test(li.textContent)) {
+          li.classList.add('nav-utility-cta');
+        }
+        // Turn the Search link into an icon-only control.
+        if (link && /^#?search$/i.test(link.getAttribute('href') || '') && /search/i.test(li.textContent)) {
+          li.classList.add('nav-utility-search');
+          link.setAttribute('aria-label', 'Search');
+        }
+      });
+      // Wrap the utility links in their own nav landmark (mirrors the source's
+      // separate "Header Navigation" region).
+      const utilNav = document.createElement('nav');
+      utilNav.className = 'nav-utility-nav';
+      utilNav.setAttribute('aria-label', 'Header Navigation');
+      utilNav.append(utility);
+      brand.append(utilNav);
     }
 
     nav.append(brand);
   }
 
   // --- Collapsible wrapper for main + sub nav (mobile drawer) ---
+  // Labelled as the root nav panel (depth 0). This is a flat accordion drawer:
+  // sections expand in place, there are no slide-in sub-panels.
   const menu = document.createElement('div');
-  menu.className = 'nav-menu';
+  menu.className = 'nav-menu nav-panel';
+  menu.dataset.depth = '0';
 
   // --- Main navigation (section 1) ---
   if (mainSection) {
@@ -101,15 +117,47 @@ export default async function decorate(block) {
   }
 
   // --- Contextual sub-nav (section 2) ---
+  // Nested accordion panel (depth 1): the active section's children. Rendered
+  // in place (no slide-in), so it exposes no further trigger paths.
   if (subSection) {
     const sub = document.createElement('div');
-    sub.className = 'nav-subnav';
+    sub.className = 'nav-subnav nav-panel';
+    sub.dataset.depth = '1';
     const list = subSection.querySelector('ul');
     if (list) {
       list.className = 'nav-subnav-list';
       sub.append(list);
     }
     menu.append(sub);
+  }
+
+  // --- Mobile-only utility links inside the drawer ---
+  // On mobile the source relocates the brand-bar utility links (ATMs/Locations,
+  // Help, Español, Search) into the bottom of the open drawer. Clone the text
+  // utility links (not the Sign On pill, which stays in the red bar) so they are
+  // reachable when the drawer is open. Shown only at mobile via CSS.
+  if (brandSection) {
+    const utilityList = nav.querySelector('.nav-utility');
+    if (utilityList) {
+      const mobileUtility = document.createElement('div');
+      mobileUtility.className = 'nav-utility-mobile';
+      const clone = utilityList.cloneNode(true);
+      clone.className = 'nav-utility-mobile-list';
+      [...clone.querySelectorAll('li')].forEach((li) => {
+        if (li.classList.contains('nav-utility-cta')) {
+          li.remove();
+          return;
+        }
+        // Show the search control as a plain text link in the drawer.
+        if (li.classList.contains('nav-utility-search')) {
+          li.classList.remove('nav-utility-search');
+          const link = li.querySelector('a');
+          if (link) link.textContent = 'Search';
+        }
+      });
+      mobileUtility.append(clone);
+      menu.append(mobileUtility);
+    }
   }
 
   nav.append(menu);

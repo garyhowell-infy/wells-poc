@@ -1,0 +1,43 @@
+{
+  "baseBlock": "hero",
+  "variants": [
+    {
+      "variantName": "hero-marquee",
+      "selector": ".hero.hero-marquee",
+      "version": "1.0.0",
+      "created": "2026-07-16",
+      "sourceContext": {
+        "originUrl": "https://www.wellsfargo.com/biz/",
+        "originPage": "Wells Fargo Business homepage",
+        "blockPosition": "top"
+      },
+      "visualCharacteristics": {
+        "colorScheme": "colored",
+        "density": "compact",
+        "purpose": "promotional-marquee",
+        "imagePattern": "large"
+      },
+      "contentPattern": {
+        "structure": "background image + heading + supporting text + 1 CTA",
+        "buttonCount": 1,
+        "imageCount": 1
+      },
+      "reuseGuidance": {
+        "suitableFor": [
+          "compact promotional banners",
+          "offer/announcement marquees with a single CTA",
+          "brand-colored or photo-backed hero bands shorter than a full hero"
+        ],
+        "notSuitableFor": [
+          "full-bleed overlay hero at top of page (use base hero)",
+          "blog article headers (use hero article variant)"
+        ]
+      },
+      "usage": {
+        "pagesUsing": ["/biz/index", "/about/index"],
+        "reuseCount": 2,
+        "lastUsed": "2026-07-16"
+      }
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Team Profile block — circular avatar + name/role + bio layout */
+
+.team-profile > div {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+}
+
+/* avatar column */
+.team-profile .team-profile-avatar {
+  line-height: 0;
+}
+
+.team-profile .team-profile-avatar p {
+  margin: 0;
+}
+
+/* profile avatar */
+.team-profile img {
+  box-sizing: border-box;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-color);
+  object-fit: cover;
+}
+
+/* profile name — Syncopate heading font */
+.team-profile .team-profile-avatar > p:last-child {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  color: var(--text-color);
+  margin-top: var(--gap-sm);
+}
+
+/* profile role */
+.team-profile em {
+  font-style: normal;
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-s);
+}
+
+/* bio paragraphs */
+.team-profile .team-profile-text p {
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+@media (width >= 768px) {
+  /* desktop: avatar left, text right */
+  .team-profile > div {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-3xl);
+    align-items: start;
+  }
+
+  /* Offset by container padding so bio text aligns with narrow sections below */
+  .tabs-container .team-profile > div {
+    padding-left: var(--gap-lg);
+  }
+
+  .team-profile .team-profile-avatar {
+    flex-shrink: 0;
+    width: 128px;
+  }
+
+  .team-profile .team-profile-text {
+    flex: 1;
+    padding-top: 0;
+  }
+}

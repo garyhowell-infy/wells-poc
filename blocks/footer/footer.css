@@ -1,20 +1,66 @@
+/* stylelint-disable no-descending-specificity */
+
+/*
+ * Wells Fargo footer — compact legal footer
+ *   .footer-links     : row of legal/nav links
+ *   .footer-copyright : copyright line
+ */
+
 footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+  background-color: var(--light-color, #f4f0ed);
+  border-top: 1px solid var(--border-color, #b5adad);
+  color: var(--text-color, #141414);
+  font-family: var(--body-font-family);
 }
 
-footer .footer > div {
-  margin: auto;
-  max-width: 1200px;
-  padding: 40px 24px 24px;
+footer > div {
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 24px;
 }
 
-footer .footer p {
+/* Links row */
+footer .footer-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 24px;
+}
+
+footer .footer-links li {
   margin: 0;
 }
 
-@media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+footer .footer-links a:any-link {
+  color: var(--text-color, #141414);
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+footer .footer-links a:hover {
+  color: var(--brand-red, #d71e28);
+  text-decoration: underline;
+}
+
+/* Copyright line */
+footer .footer-copyright {
+  padding-top: 8px;
+}
+
+footer .footer-copyright p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-color-subtle, #433a38);
+}
+
+/* Mobile: stack links vertically */
+@media (width < 768px) {
+  footer .footer-links ul {
+    flex-direction: column;
+    gap: 12px;
   }
 }

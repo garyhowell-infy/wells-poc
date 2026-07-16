@@ -1,272 +1,295 @@
-/* header and nav layout */
+/* stylelint-disable no-descending-specificity */
+
+/*
+ * Wells Fargo header — three-tier nav
+ *   .nav-brand-bar : red #d71e28 utility bar (logo + utility links + Sign On pill)
+ *   .nav-sections  : white main-navigation band (top-level sections)
+ *   .nav-subnav    : white contextual sub-nav band (active section's children)
+ */
+
 header .nav-wrapper {
-  background-color: var(--background-color);
+  position: sticky;
+  top: 0;
+  z-index: 100;
   width: 100%;
-  z-index: 2;
-  position: fixed;
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-color-light);
 }
 
 header nav {
-  box-sizing: border-box;
-  display: grid;
-  grid-template:
-    'hamburger brand tools' var(--nav-height)
-    'sections sections sections' 1fr / auto 1fr auto;
-  align-items: center;
-  gap: 0 24px;
-  margin: auto;
-  max-width: 1248px;
-  height: var(--nav-height);
-  padding: 0 24px;
+  display: block;
+  margin: 0;
   font-family: var(--body-font-family);
 }
 
-header nav[aria-expanded='true'] {
-  grid-template:
-    'hamburger brand' var(--nav-height)
-    'sections sections' 1fr
-    'tools tools' var(--nav-height) / auto 1fr;
-  overflow-y: auto;
-  min-height: 100dvh;
-}
-
-@media (width >= 900px) {
-  header .nav-wrapper {
-    position: relative;
-  }
-
-  header nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 0 32px;
-    max-width: 1264px;
-    padding: 0 32px;
-  }
-
-  header nav[aria-expanded='true'] {
-    min-height: 0;
-    overflow: visible;
-  }
-}
-
-header nav p {
+header nav ul {
+  list-style: none;
   margin: 0;
-  line-height: 1;
+  padding: 0;
 }
 
 header nav a:any-link {
-  color: currentcolor;
+  text-decoration: none;
+  color: inherit;
 }
 
-/* hamburger */
-header nav .nav-hamburger {
-  grid-area: hamburger;
-  height: 22px;
+/* ---------- Row 0: brand / utility bar (red) ---------- */
+header .nav-brand-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap-md);
+  background-color: var(--brand-red, #d71e28);
+  padding: 0 24px;
+  min-height: 56px;
+}
+
+header .nav-logo {
+  margin: 0;
   display: flex;
   align-items: center;
 }
 
-header nav .nav-hamburger button {
+header .nav-logo img {
+  display: block;
   height: 22px;
-  margin: 0;
-  border: 0;
-  border-radius: 0;
-  padding: 0;
-  background-color: var(--background-color);
-  color: inherit;
-  overflow: initial;
-  text-overflow: initial;
-  white-space: initial;
+  width: auto;
 }
 
-header nav .nav-hamburger-icon,
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
-  box-sizing: border-box;
+header .nav-utility {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-lg);
+}
+
+header .nav-utility li {
+  display: flex;
+  align-items: center;
+}
+
+header .nav-utility a:any-link {
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.2;
+  transition: opacity var(--transition-fast);
+}
+
+header .nav-utility a:hover {
+  opacity: 0.85;
+  text-decoration: underline;
+}
+
+/* Sign On pill button */
+header .nav-utility-cta a:any-link {
+  border: 1px solid #fff;
+  border-radius: 24px;
+  padding: 7px 22px;
+  font-family: var(--heading-font-family);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+header .nav-utility-cta a:hover {
+  background-color: #fff;
+  color: var(--brand-red, #d71e28);
+  opacity: 1;
+  text-decoration: none;
+}
+
+/* ---------- Row 1: main navigation (white) ---------- */
+header .nav-sections {
+  background-color: #fff;
+  padding: 0 24px;
+}
+
+header .nav-sections-list {
+  display: flex;
+  align-items: stretch;
+  gap: var(--gap-xl);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+header .nav-sections-list > li {
+  display: flex;
+  align-items: center;
+}
+
+header .nav-sections-list a:any-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 18px 0;
+  color: var(--text-color);
+  font-size: 16px;
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+header .nav-sections-list a:hover {
+  color: var(--brand-red, #d71e28);
+}
+
+/* Active section: red underline indicator */
+header .nav-sections-list .nav-active a:any-link {
+  color: var(--text-color);
+  border-bottom-color: var(--brand-red, #d71e28);
+  font-family: var(--heading-font-family);
+}
+
+/* ---------- Row 2: contextual sub-nav (white, subtle divider) ---------- */
+header .nav-subnav {
+  background-color: #fff;
+  padding: 0 24px;
+  border-top: 1px solid var(--border-color-light);
+}
+
+header .nav-subnav-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--gap-xl);
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+}
+
+header .nav-subnav-list a:any-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 14px 0;
+  color: var(--text-color-subtle);
+  font-size: 15px;
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+header .nav-subnav-list a:hover {
+  color: var(--brand-red, #d71e28);
+  border-bottom-color: var(--brand-red, #d71e28);
+}
+
+/* ---------- Hamburger (mobile only) ---------- */
+header .nav-hamburger {
+  display: none;
+}
+
+header .nav-hamburger button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+header .nav-hamburger-icon,
+header .nav-hamburger-icon::before,
+header .nav-hamburger-icon::after {
   display: block;
   position: relative;
-  width: 20px;
+  width: 22px;
+  height: 2px;
+  background-color: #fff;
+  transition: transform var(--transition-normal), opacity var(--transition-fast);
 }
 
-header nav .nav-hamburger-icon::before,
-header nav .nav-hamburger-icon::after {
+header .nav-hamburger-icon::before,
+header .nav-hamburger-icon::after {
   content: '';
   position: absolute;
-  background: currentcolor;
+  left: 0;
 }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon,
-header nav[aria-expanded='false'] .nav-hamburger-icon::before,
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  height: 2px;
-  border-radius: 2px;
-  background: currentcolor;
-}
+header .nav-hamburger-icon::before { top: -7px; }
+header .nav-hamburger-icon::after { top: 7px; }
 
-header nav[aria-expanded='false'] .nav-hamburger-icon::before {
-  top: -6px;
-}
-
-header nav[aria-expanded='false'] .nav-hamburger-icon::after {
-  top: 6px;
-}
-
+/* Hamburger morphs to an X when the drawer is open */
 header nav[aria-expanded='true'] .nav-hamburger-icon {
-  height: 22px;
+  background-color: transparent;
 }
 
-header nav[aria-expanded='true'] .nav-hamburger-icon::before,
-header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: 3px;
-  left: 1px;
+header nav[aria-expanded='true'] .nav-hamburger-icon::before {
+  top: 0;
   transform: rotate(45deg);
-  transform-origin: 2px 1px;
-  width: 24px;
-  height: 2px;
-  border-radius: 2px;
 }
 
 header nav[aria-expanded='true'] .nav-hamburger-icon::after {
-  top: unset;
-  bottom: 3px;
+  top: 0;
   transform: rotate(-45deg);
 }
 
-@media (width >= 900px) {
-  header nav .nav-hamburger {
-    display: none;
-    visibility: hidden;
-  }
-}
-
-/* brand */
-header .nav-brand {
-  grid-area: brand;
-  flex-basis: 128px;
-  font-size: var(--heading-font-size-s);
-  font-weight: 700;
-  line-height: 1;
-}
-
-header nav .nav-brand img {
-  width: 128px;
-  height: auto;
-}
-
-/* sections */
-header nav .nav-sections {
-  grid-area: sections;
-  flex: 1 1 auto;
-  display: none;
-  visibility: hidden;
-}
-
-header nav[aria-expanded='true'] .nav-sections {
-  display: block;
-  visibility: visible;
-  align-self: start;
-}
-
-header nav .nav-sections ul {
-  list-style: none;
-  padding-left: 0;
-  font-size: var(--body-font-size-s);
-}
-
-header nav .nav-sections ul > li {
-  font-weight: 500;
-}
-
-header nav .nav-sections ul > li > ul {
-  margin-top: 0;
-}
-
-header nav .nav-sections ul > li > ul > li {
-  font-weight: 400;
-}
-
-@media (width >= 900px) {
-  header nav .nav-sections {
+/* ---------- Mobile layout (< 1024px) ---------- */
+@media (width < 1024px) {
+  header .nav-hamburger {
     display: block;
-    visibility: visible;
-    white-space: nowrap;
+    order: 2;
   }
 
-  header nav[aria-expanded='true'] .nav-sections {
-    align-self: unset;
+  /* Brand bar on mobile: logo (left), hamburger + Sign On (right). */
+  header .nav-logo { order: 0; }
+
+  header .nav-utility {
+    order: 3;
+    gap: var(--gap-md);
   }
 
-  header nav .nav-sections .nav-drop {
-    position: relative;
-    padding-right: 16px;
-    cursor: pointer;
-  }
-
-  header nav .nav-sections .nav-drop::after {
-    content: '';
-    display: inline-block;
-    position: absolute;
-    top: 0.5em;
-    right: 2px;
-    transform: rotate(135deg);
-    width: 6px;
-    height: 6px;
-    border: 2px solid currentcolor;
-    border-radius: 0 1px 0 0;
-    border-width: 2px 2px 0 0;
-  }
-
-  header nav .nav-sections .nav-drop[aria-expanded='true']::after {
-    top: unset;
-    bottom: 0.5em;
-    transform: rotate(315deg);
-  }
-
-  header nav .nav-sections ul {
-    display: flex;
-    gap: 24px;
-    margin: 0;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li {
-    flex: 0 1 auto;
-    position: relative;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+  /* Only the Sign On pill stays in the red bar; other utility links live in
+     the drawer's nav lists on mobile (matches source's compact mobile bar). */
+  header .nav-utility li:not(.nav-utility-cta) {
     display: none;
-    position: relative;
   }
 
-  header nav .nav-sections .default-content-wrapper > ul > li[aria-expanded='true'] > ul {
+  header .nav-menu {
+    display: none;
+    background-color: #fff;
+  }
+
+  header nav[aria-expanded='true'] .nav-menu {
     display: block;
-    position: absolute;
-    left: -24px;
-    width: 200px;
-    top: 150%;
-    padding: 16px;
+  }
+
+  header .nav-sections,
+  header .nav-subnav {
+    padding: 0;
+    border-top: 0;
+  }
+
+  header .nav-sections-list,
+  header .nav-subnav-list {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    width: 100%;
+  }
+
+  header .nav-sections-list > li,
+  header .nav-subnav-list > li {
+    width: 100%;
+    border-bottom: 1px solid var(--border-color-light);
+  }
+
+  header .nav-sections-list a:any-link,
+  header .nav-subnav-list a:any-link {
+    width: 100%;
+    padding: 14px 24px;
+    border-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  header .nav-subnav {
     background-color: var(--light-color);
-    white-space: initial;
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
-    content: '';
-    position: absolute;
-    top: -8px;
-    left: 16px;
-    width: 0;
-    height: 0;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid var(--light-color);
-  }
-
-  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
-    padding: 8px 0;
   }
 }
 
-/* tools */
-header nav .nav-tools {
-  grid-area: tools;
+/* ---------- Desktop layout (>= 1024px) ---------- */
+@media (width >= 1024px) {
+  header .nav-hamburger {
+    display: none;
+  }
+
+  header .nav-menu {
+    display: block;
+  }
 }

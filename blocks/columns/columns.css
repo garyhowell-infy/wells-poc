@@ -1,3 +1,8 @@
+/* stylelint-disable no-descending-specificity -- consolidated variant file */
+
+/* Columns block — base + variants (columns-about, columns-promo, columns-pullquote) */
+
+/* ===== Base columns ===== */
 .columns > div {
   display: flex;
   flex-direction: column;
@@ -19,15 +24,387 @@
   display: block;
 }
 
-@media (width >= 900px) {
+@media (width >= 768px) {
   .columns > div {
     align-items: center;
     flex-direction: unset;
-    gap: 24px;
+    gap: var(--gap-lg);
   }
 
   .columns > div > div {
     flex: 1;
     order: unset;
+  }
+}
+
+/* ===== Columns About variant ===== */
+.columns.columns-about > div {
+  gap: var(--gap-lg);
+}
+
+.columns.columns-about .columns-text-col h2 {
+  margin-bottom: var(--gap-xs);
+}
+
+.columns.columns-about .columns-text-col p {
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+/* Image column: rounded with constrained aspect ratio matching the original */
+.columns.columns-about .columns-img-col img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--card-border-radius);
+  display: block;
+}
+
+@media (width >= 768px) {
+  .columns.columns-about > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-3xl);
+    align-items: start;
+  }
+
+  .columns.columns-about > div > div {
+    order: unset;
+  }
+}
+
+/* ===== Columns Promo variant ===== */
+
+/* narrow container override via :has() */
+.columns-wrapper:has(.columns-promo) {
+  max-width: var(--container-narrow-max-width);
+}
+
+/* row = grid of promo cards */
+.columns.columns-promo > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+/* each cell = promo card */
+.columns.columns-promo > div > div {
+  padding: var(--gap-lg);
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--card-border-radius);
+  transition: var(--card-hover-transition);
+}
+
+.columns.columns-promo > div > div:hover {
+  background-color: var(--cream-color);
+  border-color: var(--border-color);
+  box-shadow: var(--card-hover-shadow);
+}
+
+/* eyebrow — em wrapper */
+.columns.columns-promo em {
+  display: inline-block;
+  font-style: normal;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  color: var(--accent-color);
+}
+
+.columns.columns-promo h3 {
+  margin-bottom: var(--gap-xs);
+}
+
+.columns.columns-promo p {
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+/* ghost button link */
+.columns.columns-promo a:any-link {
+  display: inline-block;
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  letter-spacing: var(--button-letter-spacing);
+  text-decoration: none;
+  padding: var(--button-padding);
+  background-color: transparent;
+  color: var(--dark-color);
+  border: 2px solid var(--dark-color);
+  border-radius: var(--button-border-radius);
+  box-shadow: 3px 3px 0 var(--accent-color);
+  transition: var(--button-transition);
+}
+
+.columns.columns-promo a:any-link:hover {
+  background-color: var(--dark-color);
+  color: var(--background-color);
+  transform: translateY(-2px);
+  box-shadow: 5px 5px 0 var(--accent-color);
+}
+
+.columns.columns-promo a:any-link:active {
+  background-color: var(--dark-color);
+  color: var(--background-color);
+  transform: translateY(0);
+  box-shadow: 0 0 0 var(--accent-color);
+}
+
+.columns.columns-promo img {
+  display: none;
+}
+
+@media (width >= 768px) {
+  .columns.columns-promo > div {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ===== Columns Pullquote variant ===== */
+.columns.columns-pullquote > div {
+  gap: var(--gap-lg);
+}
+
+/* gear list column */
+.columns.columns-pullquote > div > div:first-child h3 {
+  margin-bottom: var(--gap-md);
+}
+
+.columns.columns-pullquote > div > div:first-child ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.columns.columns-pullquote > div > div:first-child li {
+  padding: var(--gap-xs) 0;
+  border-bottom: 1px solid var(--border-color-light);
+  font-weight: 500;
+}
+
+/* pull quote column */
+.columns.columns-pullquote > div > div:last-child {
+  background-color: var(--dark-color);
+  border-radius: var(--card-border-radius);
+  padding: var(--gap-xl);
+  color: var(--background-color);
+}
+
+.columns.columns-pullquote > div > div:last-child blockquote,
+.columns.columns-pullquote > div > div:last-child p {
+  color: var(--background-color);
+  font-size: var(--heading-font-size-m);
+  font-style: italic;
+  line-height: 1.4;
+  margin: 0 0 var(--gap-md);
+}
+
+.columns.columns-pullquote > div > div:last-child em {
+  font-style: normal;
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-s);
+}
+
+@media (width >= 768px) {
+  .columns.columns-pullquote > div {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--gap-lg);
+    align-items: start;
+  }
+}
+
+/* ===== Columns Feature variant =====
+   Full-width promotional band with a prominent side image and a content column.
+   Two source shapes both map here:
+   1. Large promo (no list): full-bleed side image + light-weight heading + one
+      line of text + a single WF pill CTA. Content sits over the image on the
+      left on desktop.
+   2. Zelle app band (has a <ul>): teal gradient band, phone mockup image left,
+      heading + subheading + 3-item feature list + two app-store badge links.
+   Distinguished via :has(.columns-text-col ul). Both stack to one column on
+   mobile. */
+
+/* full-bleed band: cancel the section's 1200px max-width + horizontal padding */
+.columns-wrapper:has(.columns-feature) {
+  max-width: 100%;
+}
+
+.columns.columns-feature > div {
+  gap: 0;
+}
+
+.columns.columns-feature .columns-text-col h2,
+.columns.columns-feature .columns-text-col h3 {
+  margin: 0 0 var(--gap-md);
+  color: var(--dark-color);
+}
+
+.columns.columns-feature .columns-text-col p {
+  margin: 0 0 var(--gap-lg);
+  line-height: 1.25;
+}
+
+/* ---- Large promo (default: no feature list) ---- */
+
+/* background image fills the band; content overlays the left over a light scrim */
+.columns.columns-feature:not(:has(.columns-text-col ul)) .columns-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col {
+  padding: var(--gap-2xl) var(--gap-lg);
+}
+
+.columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col h2 {
+  font-weight: 300;
+  font-size: 34px;
+  line-height: 1.33;
+}
+
+.columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col p {
+  font-size: 18px;
+  color: var(--dark-color);
+}
+
+/* Large promo CTA is a white pill with a dark outline (WF secondary), not the
+   brand-red fill that strong-link auto-decoration produces. */
+.columns.columns-feature:not(:has(.columns-text-col ul)) a.button:any-link {
+  border-color: var(--text-color-subtle);
+  background-color: #fff;
+  color: var(--text-color-subtle);
+  padding: 9px 44px;
+}
+
+.columns.columns-feature:not(:has(.columns-text-col ul)) a.button:hover {
+  border-color: var(--text-color-subtle);
+  background-color: var(--text-color-subtle);
+  color: #fff;
+}
+
+/* ---- Zelle app-download band (has feature list) ---- */
+.columns.columns-feature:has(.columns-text-col ul) {
+  background-image: linear-gradient(166deg, #01222d -1%, #017994 57%);
+  color: #fff;
+}
+
+.columns.columns-feature:has(.columns-text-col ul) > div {
+  padding: var(--gap-2xl) var(--gap-lg);
+}
+
+/* phone mockup shows in full (contained), not cropped */
+.columns.columns-feature:has(.columns-text-col ul) .columns-img-col img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 480px;
+  margin: 0 auto;
+  object-fit: contain;
+}
+
+.columns.columns-feature:has(.columns-text-col ul) .columns-text-col h2 {
+  font-weight: 600;
+  font-size: var(--heading-font-size-xl);
+  color: #fff;
+}
+
+.columns.columns-feature:has(.columns-text-col ul) .columns-text-col > p {
+  font-size: 22px;
+  color: #fff;
+}
+
+/* feature list (Get paid / Pay suppliers / Issue reimbursements) */
+.columns.columns-feature .columns-text-col ul {
+  margin: var(--gap-lg) 0;
+  padding-left: var(--gap-lg);
+}
+
+.columns.columns-feature:has(.columns-text-col ul) .columns-text-col li {
+  color: #fff;
+  font-size: 18px;
+  line-height: 1.3;
+  margin: var(--gap-md) 0;
+}
+
+/* app-store / download badge links render inline side-by-side */
+.columns.columns-feature:has(.columns-text-col ul) .columns-text-col p:has(a img) {
+  display: inline-block;
+  margin: var(--gap-md) var(--gap-md) 0 0;
+}
+
+.columns.columns-feature:has(.columns-text-col ul) .columns-text-col p a img {
+  width: auto;
+  height: 52px;
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns.columns-feature > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 0;
+  }
+
+  .columns.columns-feature > div > div {
+    order: unset;
+  }
+
+  /* large promo: image spans full band as background, content overlays left */
+  .columns.columns-feature:not(:has(.columns-text-col ul)) > div {
+    position: relative;
+  }
+
+  .columns.columns-feature:not(:has(.columns-text-col ul)) .columns-img-col {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .columns.columns-feature:not(:has(.columns-text-col ul)) .columns-img-col img {
+    height: 100%;
+  }
+
+  .columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col {
+    position: relative;
+    z-index: 1;
+    padding: 72px var(--gap-2xl);
+    background: linear-gradient(90deg, rgb(255 255 255 / 92%) 60%, rgb(255 255 255 / 0%));
+  }
+
+  .columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col h2 {
+    font-size: 42px;
+  }
+
+  .columns.columns-feature:not(:has(.columns-text-col ul)) .columns-text-col p {
+    font-size: 24px;
+    line-height: 1.25;
+  }
+
+  /* zelle band: image column right-aligned near center, generous padding */
+  .columns.columns-feature:has(.columns-text-col ul) > div {
+    padding: var(--gap-3xl) var(--gap-3xl);
+    gap: var(--gap-2xl);
+    align-items: center;
+  }
+
+  .columns.columns-feature:has(.columns-text-col ul) .columns-text-col h2 {
+    font-size: 42px;
+  }
+
+  .columns.columns-feature:has(.columns-text-col ul) .columns-text-col > p {
+    font-size: 32px;
+  }
+
+  .columns.columns-feature:has(.columns-text-col ul) .columns-text-col li {
+    font-size: 24px;
   }
 }

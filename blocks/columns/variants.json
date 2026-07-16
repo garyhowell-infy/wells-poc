@@ -1,0 +1,39 @@
+{
+  "baseBlock": "columns",
+  "variants": [
+    {
+      "variantName": "columns-feature",
+      "selector": ".columns.columns-feature",
+      "version": "1.0.0",
+      "created": "2026-07-16",
+      "sourceContext": {
+        "originUrl": "https://www.wellsfargo.com/biz/",
+        "originPage": "Wells Fargo Business homepage",
+        "blockPosition": "middle"
+      },
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "spacious",
+        "purpose": "feature-band",
+        "imagePattern": "large"
+      },
+      "contentPattern": {
+        "structure": "image column + content column (heading + text/list + CTA or app-store badges)",
+        "buttonCount": 1,
+        "imageCount": 1
+      },
+      "reuseGuidance": {
+        "suitableFor": [
+          "large full-width promotional bands (image beside content)",
+          "app-download bands (phone mockup + feature list + store badges)",
+          "product-selector style callouts"
+        ],
+        "notSuitableFor": [
+          "editorial about/promo/pullquote layouts (use columns-about/columns-promo/columns-pullquote)",
+          "3+ equal text columns"
+        ]
+      },
+      "usage": { "pagesUsing": ["/biz/index", "/about/index"], "reuseCount": 3, "lastUsed": "2026-07-16" }
+    }
+  ]
+}

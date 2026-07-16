@@ -1,0 +1,58 @@
+/* Editorial Index block — numbered items with large accent numbers */
+
+.editorial-index > div {
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: var(--gap-lg);
+  align-items: start;
+  border-top: 1px solid var(--accent-color);
+  padding: var(--gap-xl) 0;
+}
+
+.editorial-index > div:last-child {
+  border-bottom: 1px solid var(--accent-color);
+}
+
+/* number column */
+.editorial-index > div > div:first-child {
+  font-family: var(--heading-font-family);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: -0.03em;
+  line-height: 48px;
+}
+
+/* strip margin from any <p> EDS wraps around the number text */
+.editorial-index > div > div:first-child p {
+  margin: 0;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  line-height: inherit;
+}
+
+/* content column — align heading top with number top */
+.editorial-index > div > div:last-child h3 {
+  font-size: var(--heading-font-size-m);
+  line-height: 1.1;
+  margin: 0 0 var(--gap-xs);
+}
+
+.editorial-index > div > div:last-child p {
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+@media (width >= 768px) {
+  .editorial-index > div {
+    grid-template-columns: 80px 1fr;
+    gap: var(--gap-2xl);
+  }
+
+  .editorial-index > div > div:first-child {
+    font-size: 56px;
+    line-height: 56px;
+  }
+}

@@ -1,0 +1,86 @@
+{
+  "baseBlock": "cards",
+  "variants": [
+    {
+      "variantName": "cards-quicklinks",
+      "selector": ".cards.cards-quicklinks",
+      "version": "1.0.0",
+      "created": "2026-07-16",
+      "sourceContext": {
+        "originUrl": "https://www.wellsfargo.com/biz/",
+        "originPage": "Wells Fargo Business homepage",
+        "blockPosition": "top"
+      },
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "compact",
+        "purpose": "quicklinks",
+        "imagePattern": "icon"
+      },
+      "contentPattern": {
+        "structure": "icon + short label link, repeated",
+        "buttonCount": 0,
+        "imageCount": 1
+      },
+      "reuseGuidance": {
+        "suitableFor": ["icon shortcut strips", "quick-nav link rows", "category jump links"],
+        "notSuitableFor": ["photo marketing cards", "article cards"]
+      },
+      "usage": { "pagesUsing": ["/biz/index"], "reuseCount": 1, "lastUsed": "2026-07-16" }
+    },
+    {
+      "variantName": "cards-promo",
+      "selector": ".cards.cards-promo",
+      "version": "1.0.0",
+      "created": "2026-07-16",
+      "sourceContext": {
+        "originUrl": "https://www.wellsfargo.com/biz/",
+        "originPage": "Wells Fargo Business homepage",
+        "blockPosition": "middle"
+      },
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "spacious",
+        "purpose": "marketing-promo",
+        "imagePattern": "icon"
+      },
+      "contentPattern": {
+        "structure": "icon (optional) + heading + description + text link, repeated (up to 4-up)",
+        "buttonCount": 0,
+        "imageCount": 1
+      },
+      "reuseGuidance": {
+        "suitableFor": ["4-up marketing promo grids", "icon+heading+text link tiles", "help/contact link groups (no image)"],
+        "notSuitableFor": ["photo hero cards", "tabular data"]
+      },
+      "usage": { "pagesUsing": ["/biz/index", "/about/index"], "reuseCount": 3, "lastUsed": "2026-07-16" }
+    },
+    {
+      "variantName": "cards-marketing",
+      "selector": ".cards.cards-marketing",
+      "version": "1.0.0",
+      "created": "2026-07-16",
+      "sourceContext": {
+        "originUrl": "https://www.wellsfargo.com/biz/",
+        "originPage": "Wells Fargo Business homepage",
+        "blockPosition": "middle"
+      },
+      "visualCharacteristics": {
+        "colorScheme": "light",
+        "density": "spacious",
+        "purpose": "marketing-card",
+        "imagePattern": "large"
+      },
+      "contentPattern": {
+        "structure": "photo + heading + description + optional CTA button, repeated (2-up or 3-up)",
+        "buttonCount": 1,
+        "imageCount": 1
+      },
+      "reuseGuidance": {
+        "suitableFor": ["photo marketing card grids", "product/resource highlight cards with CTAs"],
+        "notSuitableFor": ["icon shortcut strips", "text-only cards (use cards no images)"]
+      },
+      "usage": { "pagesUsing": ["/biz/index", "/about/index"], "reuseCount": 4, "lastUsed": "2026-07-16" }
+    }
+  ]
+}

@@ -1,19 +1,36 @@
+/* stylelint-disable no-descending-specificity -- consolidated variant file */
+
+/* Cards block — base + variants (cards-article, cards-feature) */
+
+/* ===== Base cards ===== */
 .cards > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  gap: var(--gap-lg);
 }
 
 .cards > ul > li {
-  border: 1px solid #dadada;
+  border: 1px solid var(--border-color-light);
   background-color: var(--background-color);
 }
 
+/* Full-surface card link — covers entire card without affecting layout */
+.cards .cards-card-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.cards .cards-card-link:hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 .cards .cards-card-body {
-  margin: 16px;
+  margin: var(--gap-md);
 }
 
 .cards .cards-card-image {
@@ -25,3 +42,535 @@
   aspect-ratio: 4 / 3;
   object-fit: cover;
 }
+
+/* ===== Cards Article variant ===== */
+.cards.cards-article > ul {
+  grid-template-columns: 1fr;
+  gap: var(--gap-md);
+}
+
+.cards.cards-article > ul > li {
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--card-border-radius);
+  overflow: hidden;
+  background-color: var(--background-color);
+  transition: var(--card-hover-transition);
+}
+
+.cards.cards-article > ul > li:hover {
+  background-color: var(--cream-color);
+  border-color: var(--border-color);
+  box-shadow: var(--card-hover-shadow);
+}
+
+.cards.cards-article .cards-card-image {
+  overflow: hidden;
+  line-height: 0;
+  aspect-ratio: 16 / 10;
+}
+
+/* handle img inside <p> (no <picture> wrapper) */
+.cards.cards-article .cards-card-image p {
+  margin: 0;
+  line-height: 0;
+}
+
+.cards.cards-article > ul > li img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  transition: transform var(--transition-normal);
+}
+
+.cards.cards-article .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  padding: var(--gap-lg) var(--gap-md);
+  margin: 0;
+}
+
+/* tag pill — uses .tag-pill utility from styles.css */
+.cards.cards-article .cards-card-body .tag-pill {
+  width: fit-content;
+}
+
+/* secondary tag text — em wrapper (region: Americas, Europe) */
+.cards.cards-article .cards-card-body em {
+  font-style: normal;
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-s);
+}
+
+.cards.cards-article .cards-card-body h3,
+.cards.cards-article .cards-card-body h5 {
+  margin: 0;
+  font-size: var(--body-font-size-s);
+  letter-spacing: 0.7px;
+  line-height: 1.1;
+  color: var(--dark-color);
+}
+
+.cards.cards-article .cards-card-body h3 a,
+.cards.cards-article .cards-card-body h5 a {
+  color: var(--dark-color);
+  text-decoration: none;
+}
+
+.cards.cards-article .cards-card-body p:not(.tag-pill) {
+  color: var(--text-color-muted);
+  font-size: var(--body-font-size-s);
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* "Read More" link */
+.cards.cards-article .cards-card-body > p:last-child a {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 700;
+  letter-spacing: var(--text-link-letter-spacing);
+  color: var(--accent-color);
+  text-decoration: underline;
+  text-underline-offset: var(--text-link-underline-offset);
+}
+
+/* dark section: glass card variant */
+.section.dark .cards.cards-article > ul > li {
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+}
+
+.section.dark .cards.cards-article > ul > li h3,
+.section.dark .cards.cards-article > ul > li h5 {
+  color: var(--background-color);
+}
+
+.section.dark .cards.cards-article > ul > li p {
+  color: var(--text-on-dark-muted);
+}
+
+.section.dark .cards.cards-article > ul > li:hover {
+  background-color: var(--cream-color);
+  border-color: var(--border-color);
+}
+
+.section.dark .cards.cards-article > ul > li:hover h3,
+.section.dark .cards.cards-article > ul > li:hover h5,
+.section.dark .cards.cards-article > ul > li:hover p {
+  color: var(--dark-color);
+}
+
+@media (width >= 768px) {
+  .cards.cards-article > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== Cards Feature variant ===== */
+.cards.cards-feature > ul {
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+.cards.cards-feature > ul > li {
+  padding: var(--gap-lg);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-border-radius);
+}
+
+/* hide image area — text-only cards */
+.cards.cards-feature .cards-card-image {
+  display: none;
+}
+
+.cards.cards-feature .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-xs);
+  margin: 0;
+}
+
+.cards.cards-feature .cards-card-body h3,
+.cards.cards-feature .cards-card-body h5 {
+  margin: 0;
+  color: var(--background-color);
+  font-size: var(--heading-font-size-m);
+}
+
+.cards.cards-feature .cards-card-body p {
+  margin: 0;
+  color: var(--text-on-dark-muted);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+}
+
+/* text-button link */
+.cards.cards-feature .cards-card-body a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: var(--text-link-letter-spacing);
+  color: var(--background-color);
+  text-decoration: underline;
+  text-underline-offset: var(--text-link-underline-offset);
+  transition: opacity var(--transition-fast);
+}
+
+.cards.cards-feature .cards-card-body a:hover {
+  opacity: 0.65;
+  color: var(--background-color);
+}
+
+@media (width >= 768px) {
+  .cards.cards-feature > ul {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ===== Cards Quicklinks variant =====
+   WF business shortcut strip (Checking, Savings, Credit Cards, ...). The source
+   is a 3-column list of icon + short-label shortcut links sitting under a thin
+   light-grey top divider. Source icons (a sprite sheet) could not be migrated,
+   so this renders as a clean 3-column grid of dark text links matching the
+   source's color (#141414), weight (400), and spacing. Wraps to fewer columns
+   on narrow viewports. Each decorated card is:
+     li > a.cards-card-link > div.cards-card-body (empty icon cell)
+                            + div.cards-card-body (label <p>) */
+.cards.cards-quicklinks > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  padding-top: var(--gap-xs);
+  border-top: 1px solid var(--border-color-light);
+}
+
+.cards.cards-quicklinks > ul > li {
+  border: none;
+  background: transparent;
+}
+
+/* full-surface link is the shortcut row itself */
+.cards.cards-quicklinks .cards-card-link {
+  display: flex;
+  align-items: center;
+  padding: 10px 8px 10px 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.cards.cards-quicklinks .cards-card-link:hover {
+  color: var(--text-color);
+  text-decoration: underline;
+}
+
+/* collapse the empty first cell (source had a sprite icon here) */
+.cards.cards-quicklinks .cards-card-body:empty {
+  display: none;
+}
+
+.cards.cards-quicklinks .cards-card-body {
+  margin: 0;
+}
+
+.cards.cards-quicklinks .cards-card-body p {
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* tablet/desktop: 3-column layout matching the source shortcut grid */
+@media (width >= 600px) {
+  .cards.cards-quicklinks > ul {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--gap-md);
+  }
+}
+
+/* ===== Cards Promo variant =====
+   4-up marketing small-promo grid: icon (centered, on top) + heading + short
+   description + text link (WF "Signify Business Cash", "Discover Wells Fargo
+   Business", "Take payments anytime, anywhere", "Funding for your business").
+   Cards are white surfaces with a 10px radius and a soft drop shadow. Source:
+   .ps-marketing-small-promo-items (flex-wrap, 1-up mobile -> 4-up desktop).
+
+   Also reused for the contact-bar help strip (heading + list of links, NO icon
+   and NO description). The empty icon cell and missing description degrade
+   gracefully: :empty icon cells collapse, cards without a description still
+   space correctly. Each decorated card is:
+     li > a.cards-card-link
+            > div.cards-card-image (icon <picture>, may be empty)
+            + div.cards-card-body   (h2 + description p + link p)          */
+.cards.cards-promo > ul {
+  grid-template-columns: 1fr;
+  gap: var(--gap-lg);
+}
+
+.cards.cards-promo > ul > li {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--background-color);
+  box-shadow: 0 1px 4px 0 rgb(0 0 0 / 25%);
+}
+
+/* the full-surface card link holds the vertical stack + content inset. It is
+   also used for contact-bar rows where the card is a single link (no icon,
+   no description) — the link colour is set explicitly so it never inherits. */
+.cards.cards-promo .cards-card-link {
+  display: block;
+  padding: var(--gap-md) var(--gap-md) var(--gap-lg);
+  color: var(--dark-color);
+}
+
+/* icon: centered on top */
+.cards.cards-promo .cards-card-image {
+  display: flex;
+  justify-content: center;
+  margin-bottom: var(--gap-xs);
+  line-height: 0;
+}
+
+.cards.cards-promo .cards-card-image img {
+  width: 48px;
+  height: 48px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+}
+
+.cards.cards-promo .cards-card-body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-sm);
+}
+
+/* collapse the empty icon placeholder cell (contact-bar rows have no icon) */
+.cards.cards-promo .cards-card-image:empty,
+.cards.cards-promo .cards-card-body:empty {
+  display: none;
+}
+
+.cards.cards-promo .cards-card-body h2,
+.cards.cards-promo .cards-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  line-height: 1.25;
+  color: var(--dark-color);
+}
+
+.cards.cards-promo .cards-card-body p {
+  margin: 0;
+  color: var(--dark-color);
+  font-size: var(--body-font-size-s);
+  line-height: 1.3;
+}
+
+/* Text link. cards.js unwraps the inner <a>, so the CTA is the LAST <p> in a
+   card that also has a heading (promo cards). Style it as the purple text link
+   with a trailing chevron. Contact-bar rows have a single <p> and no heading:
+   the :first-child guard below keeps those from being treated as a CTA. */
+.cards.cards-promo .cards-card-body h2 ~ p:last-child,
+.cards.cards-promo .cards-card-body h3 ~ p:last-child {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--gap-sm);
+  width: fit-content;
+  font-family: var(--heading-font-family);
+  font-weight: 600;
+  color: var(--link-color);
+}
+
+.cards.cards-promo .cards-card-body h2 ~ p:last-child::after,
+.cards.cards-promo .cards-card-body h3 ~ p:last-child::after {
+  content: "";
+  width: 0.4em;
+  height: 0.4em;
+  border-right: 2px solid currentcolor;
+  border-bottom: 2px solid currentcolor;
+  transform: rotate(-45deg);
+  transition: transform var(--transition-fast);
+}
+
+/* contact-bar: single-link rows render as purple text links */
+.cards.cards-promo .cards-card-body > p:only-child {
+  color: var(--link-color);
+  font-size: var(--body-font-size-m);
+}
+
+/* hover feedback on the whole clickable card */
+.cards.cards-promo .cards-card-link:hover {
+  text-decoration: none;
+}
+
+.cards.cards-promo .cards-card-link:hover .cards-card-body h2 ~ p:last-child,
+.cards.cards-promo .cards-card-link:hover .cards-card-body > p:only-child {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+  text-underline-offset: var(--text-link-underline-offset);
+}
+
+.cards.cards-promo .cards-card-link:hover .cards-card-body h2 ~ p:last-child::after,
+.cards.cards-promo .cards-card-link:hover .cards-card-body h3 ~ p:last-child::after {
+  transform: rotate(-45deg) translate(2px, 2px);
+}
+
+/* desktop: 4-up grid, larger icons */
+@media (width >= 768px) {
+  .cards.cards-promo > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .cards.cards-promo .cards-card-image img {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* ===== Cards Marketing variant =====
+   Photo + heading + description (+ optional CTA) marketing cards. Two source
+   layouts share this variant and are distinguished purely by content:
+
+   - "Why choose Wells Fargo?" 3-up (no CTA): white surface, 10px radius, soft
+     drop shadow; the photo is rounded on the top corners only.
+   - "Business resources" 2-up (with CTA): no card chrome (transparent), the
+     photo is fully rounded (10px all corners), and a white outline pill CTA
+     sits below the copy. cards.js wraps CTA cards in an a.cards-card-link and
+     turns the trailing link paragraph into p.button-wrapper.
+
+   The per-li rule set below keys off the presence of that a.cards-card-link so
+   both layouts render correctly under one variant. The grid column count
+   adapts to how many cards the author places (auto-fit); it collapses to 1-up
+   on mobile. */
+.cards.cards-marketing > ul {
+  grid-template-columns: 1fr;
+  gap: var(--gap-xl);
+}
+
+.cards.cards-marketing > ul > li {
+  border: none;
+  background-color: transparent;
+}
+
+/* --- 3-up "Why choose" cards (no CTA link): shadowed rounded white card --- */
+.cards.cards-marketing > ul > li:not(:has(a.cards-card-link)) {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: var(--background-color);
+  box-shadow: 0 1px 5px 0 rgb(0 0 0 / 30%);
+}
+
+/* --- image framing (shared) --- */
+.cards.cards-marketing .cards-card-image {
+  overflow: hidden;
+  line-height: 0;
+  aspect-ratio: 16 / 9;
+}
+
+.cards.cards-marketing .cards-card-image p {
+  margin: 0;
+  line-height: 0;
+}
+
+.cards.cards-marketing .cards-card-image img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* 2-up cards (with CTA link) show a fully-rounded photo */
+.cards.cards-marketing > ul > li:has(a.cards-card-link) .cards-card-image,
+.cards.cards-marketing > ul > li:has(a.cards-card-link) .cards-card-image img {
+  border-radius: 10px;
+}
+
+/* --- content body --- */
+.cards.cards-marketing .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-md);
+  padding: 22px 16px 32px;
+  margin: 0;
+}
+
+/* 2-up cards have no card chrome, so the copy aligns flush with the photo */
+.cards.cards-marketing > ul > li:has(a.cards-card-link) .cards-card-body {
+  padding: 22px 0 0;
+}
+
+.cards.cards-marketing .cards-card-body h2,
+.cards.cards-marketing .cards-card-body h3 {
+  margin: 0;
+  color: var(--text-color);
+  line-height: 1.3;
+}
+
+/* 3-up "Why choose" headings are the lighter, larger marketing weight */
+.cards.cards-marketing > ul > li:not(:has(a.cards-card-link)) .cards-card-body h3 {
+  font-family: var(--body-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 300;
+}
+
+/* 2-up "Business resources" headings are semibold */
+.cards.cards-marketing > ul > li:has(a.cards-card-link) .cards-card-body h3 {
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-l);
+  font-weight: 600;
+}
+
+.cards.cards-marketing .cards-card-body p:not(.tag-pill, .button-wrapper) {
+  margin: 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-m);
+  line-height: 1.3;
+}
+
+/* CTA: cards.js unwraps the inner <a>, leaving the button text in the trailing
+   p.button-wrapper. Render it as the WF outline pill (matches a.button.secondary)
+   without relying on a real <a>. The whole card is clickable via .cards-card-link. */
+.cards.cards-marketing .cards-card-body .button-wrapper {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: var(--gap-md);
+}
+
+.cards.cards-marketing .cards-card-body .button-wrapper,
+.cards.cards-marketing .cards-card-body .button-wrapper a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 176px;
+  border: 1px solid var(--text-color-subtle);
+  border-radius: var(--button-border-radius);
+  padding: 9px 16px;
+  font-family: var(--button-font-family);
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  line-height: 1.25;
+  color: var(--text-color-subtle);
+  text-align: center;
+  text-decoration: none;
+  background-color: #fff;
+  transition: var(--button-transition);
+}
+
+.cards.cards-marketing .cards-card-link:hover .cards-card-body .button-wrapper {
+  background-color: var(--text-color-subtle);
+  color: #fff;
+}
+
+/* tablet/desktop: cards sit in a row. auto-fit gives 3-up for the "Why choose"
+   set and 2-up for the "Business resources" sets (matching source column counts). */
+@media (width >= 600px) {
+  .cards.cards-marketing > ul {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--gap-xl);
+  }
+}
+

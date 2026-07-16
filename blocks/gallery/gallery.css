@@ -1,0 +1,133 @@
+/* stylelint-disable no-descending-specificity */
+
+/* Gallery — Photo grid with flexible layout */
+
+.gallery-container {
+  --gallery-gap: var(--gap-lg, 24px);
+  --gallery-radius: var(--card-border-radius, 20px);
+  --gallery-img-height: 280px;
+  --gallery-wide-height: 360px;
+}
+
+/* Images in <p> tags need margin/line-height reset */
+.gallery p {
+  margin: 0;
+  line-height: 0;
+}
+
+/* --- Image grid rows --- */
+.gallery {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gallery-gap);
+}
+
+.gallery > div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--gallery-gap);
+}
+
+.gallery > div picture {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  border-radius: var(--gallery-radius);
+}
+
+.gallery img {
+  width: 100%;
+  height: var(--gallery-img-height);
+  object-fit: cover;
+  border-radius: var(--gallery-radius);
+  display: block;
+}
+
+/* Wide image — last row when there are multiple rows */
+.gallery > div:last-child:not(:first-child) {
+  grid-template-columns: 1fr;
+}
+
+.gallery > div:last-child:not(:first-child) img {
+  height: var(--gallery-wide-height);
+}
+
+/* --- Gallery section: heading row layout (h2 left, link right) --- */
+.gallery-container > .default-content-wrapper {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gallery-gap);
+  margin-bottom: var(--gallery-gap);
+}
+
+.gallery-container > .default-content-wrapper h2 {
+  margin-bottom: 0;
+  flex-grow: 1;
+}
+
+.gallery-container > .default-content-wrapper p {
+  line-height: normal;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.gallery-container > .default-content-wrapper a {
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: var(--text-link-letter-spacing);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: var(--text-link-underline-offset);
+  white-space: nowrap;
+  color: var(--background-color);
+}
+
+/* Reset button styling on section header links — needs to beat
+   main > .section.dark a.button.primary (specificity 0,4,1) */
+main .gallery-container > .default-content-wrapper a.button:any-link {
+  background: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: var(--text-link-underline-offset);
+  padding: 0;
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--body-font-size-s);
+  font-weight: 700;
+  letter-spacing: var(--text-link-letter-spacing);
+  color: var(--background-color);
+}
+
+main .gallery-container > .default-content-wrapper a.button:hover {
+  transform: none;
+  box-shadow: none;
+  opacity: 0.65;
+}
+
+/* --- Responsive --- */
+@media (width >= 768px) {
+  .gallery > div {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (width < 768px) {
+  .gallery-container {
+    --gallery-img-height: 200px;
+    --gallery-wide-height: 240px;
+  }
+
+  .gallery > div {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery-container > .default-content-wrapper {
+    flex-direction: column;
+    gap: var(--gap-sm);
+  }
+}

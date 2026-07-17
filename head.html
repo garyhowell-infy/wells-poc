@@ -4,6 +4,14 @@
   move-to-http-header="true"
 />
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<script nonce="aem">
+  /* The CSP above enables require-trusted-types-for 'script'. The AEM
+     boilerplate (aem.js, fragment.js, blocks) assigns strings to innerHTML,
+     which needs a Trusted Types default policy to be allowed. */
+  if (window.trustedTypes && window.trustedTypes.createPolicy) {
+    window.trustedTypes.createPolicy('default', { createHTML: (s) => s });
+  }
+</script>
 <script nonce="aem" src="/scripts/aem.js" type="module"></script>
 <script nonce="aem" src="/scripts/scripts.js" type="module"></script>
 <link rel="stylesheet" href="/styles/styles.css"/>

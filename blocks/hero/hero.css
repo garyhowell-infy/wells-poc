@@ -293,19 +293,18 @@ main .hero a.button.secondary:any-link:hover {
 }
 
 /* ===== Hero Marquee variant =====
-   WF "Switch and earn up to $825" primary banner. NOT a full-bleed overlay:
-   it is a STACKED card — a promotional illustration on a light-grey band on
-   top, then centered content (light-weight heading, one line of supporting
-   text, and a single outlined pill CTA) below on white. Overrides the base
-   hero's absolute-positioned picture, dark gradient overlay, and left-aligned
-   white text. */
+   WF "Switch and earn up to $825" primary banner: a full-bleed red banner
+   image with a Sign On card overlaid on the left and promotional text/CTA on
+   the right. The ribbon graphic is baked into the source image. */
 .hero.hero-marquee {
-  display: block;
-  min-height: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 400px;
   padding: 0;
-  overflow: visible;
-  color: var(--text-color);
-  text-align: center;
+  overflow: hidden;
+  color: var(--background-color);
+  text-align: left;
 }
 
 /* remove the base hero's dark gradient overlay */
@@ -313,68 +312,108 @@ main .hero a.button.secondary:any-link:hover {
   content: none;
 }
 
-/* image band — normal flow (not absolute), full-width promotional photo */
-.hero.hero-marquee picture {
+/* ----- Simple marquee (e.g. About page): image banner + centered heading,
+   no Sign On card and no text overlaid on the image ----- */
+main .hero.hero-marquee.hero-marquee-simple {
+  display: block;
+  min-height: 0;
+  overflow: visible;
+  color: var(--text-color);
+  text-align: center;
+}
+
+main .hero.hero-marquee.hero-marquee-simple picture {
   position: static;
   display: block;
-  background-color: var(--light-color);
+}
+
+main .hero.hero-marquee.hero-marquee-simple img {
+  height: auto;
+  object-fit: contain;
+}
+
+main .hero.hero-marquee.hero-marquee-simple > div:not(.hero-signon) {
+  position: static;
+  z-index: auto;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: var(--gap-xl) var(--gap-lg);
+  text-align: center;
+}
+
+main .hero.hero-marquee.hero-marquee-simple h1,
+main .hero.hero-marquee.hero-marquee-simple h2 {
+  color: var(--text-color);
+  max-width: none;
+  text-shadow: none;
+}
+
+/* full-bleed banner image behind everything */
+.hero.hero-marquee picture {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
 }
 
 .hero.hero-marquee img {
   display: block;
   width: 100%;
-  height: auto;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-/* content column — centered, dark text, generous horizontal padding */
-.hero.hero-marquee > div {
-  max-width: var(--container-narrow-max-width);
+/* promotional content column (heading + CTA), right of the sign-on card */
+.hero.hero-marquee > div:not(.hero-signon) {
+  position: relative;
+  z-index: 2;
+  max-width: var(--container-max-width);
+  width: 100%;
   margin: 0 auto;
-  padding: var(--gap-xl) var(--gap-2xl);
-  text-align: center;
+  padding: var(--gap-2xl) var(--gap-lg);
 }
 
 .hero.hero-marquee h1,
 .hero.hero-marquee h2 {
   font-family: var(--body-font-family);
-  font-size: 28px;
+  font-size: 44px;
   font-weight: 400;
-  line-height: 1.3;
+  line-height: 1.1;
   letter-spacing: normal;
-  color: var(--text-color);
+  color: var(--background-color);
   text-shadow: none;
   margin: 0 0 var(--gap-md);
+  max-width: 520px;
 }
 
 .hero.hero-marquee p:not(.tag-pill) {
-  font-size: 17px;
-  line-height: 1.3;
-  color: var(--text-color);
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--background-color);
   text-shadow: none;
-  max-width: none;
-  margin: 0 auto var(--gap-lg);
+  max-width: 520px;
+  margin: 0 0 var(--gap-lg);
 }
 
-/* CTA — center the button group and match WF secondary outlined pill */
+/* CTA — white outlined pill (matches source "Get started") */
 .section .hero.hero-marquee .button-group,
 .hero.hero-marquee .button-wrapper {
-  justify-content: center;
-  text-align: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .hero.hero-marquee .button-wrapper {
   margin: var(--gap-sm) 0 0;
 }
 
-/* Source CTA is the white outlined pill (secondary), not a red fill —
-   override the base hero primary button colors for this variant. */
 main .hero.hero-marquee a.button:any-link,
 main .hero.hero-marquee a.button.primary:any-link {
   background: var(--background-color);
-  border: 1px solid var(--text-color-subtle);
+  border: 1px solid var(--background-color);
   color: var(--text-color-subtle);
-  padding: 9px 28px;
+  padding: 11px 32px;
+  border-radius: 24px;
   box-shadow: none;
 }
 
@@ -382,23 +421,152 @@ main .hero.hero-marquee a.button:any-link:hover,
 main .hero.hero-marquee a.button.primary:any-link:hover {
   filter: none;
   transform: none;
-  background: var(--text-color-subtle);
-  color: var(--background-color);
+  background: rgb(255 255 255 / 90%);
+  color: var(--text-color-subtle);
   box-shadow: none;
+}
+
+/* ----- Sign On card (visual replica, overlaid left) ----- */
+.hero.hero-marquee .hero-signon {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: max(24px, calc((100% - var(--container-max-width)) / 2 + 24px));
+  transform: translateY(-50%);
+  width: 328px;
+  max-width: calc(100% - 48px);
+  flex: none;
+}
+
+.hero-signon .hero-signon-card {
+  background: #fff;
+  padding: 16px;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 0 0 12px rgb(0 0 0 / 20%);
+  color: var(--text-color);
+}
+
+.hero.hero-marquee .hero-signon h2 {
+  font-family: var(--body-font-family);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-color);
+  margin: 0 0 4px;
+  text-shadow: none;
+  max-width: none;
+}
+
+.hero.hero-marquee .hero-signon .hero-signon-sub {
+  font-size: 14px;
+  color: var(--text-color-muted);
+  margin: 0 0 var(--gap-md);
+  text-shadow: none;
+  max-width: none;
+}
+
+.hero-signon-field {
+  position: relative;
+  display: block;
+  margin-bottom: var(--gap-md);
+}
+
+.hero-signon-field input {
+  width: 100%;
+  padding: 8px 0;
+  border: 0;
+  border-bottom: 1px solid var(--text-color-muted);
+  font-size: 16px;
+  background: transparent;
+}
+
+.hero-signon-field span {
+  display: none;
+}
+
+.hero-signon-save {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-color-subtle);
+  margin-bottom: var(--gap-md);
+}
+
+.hero-signon-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--gap-md);
+}
+
+main .hero.hero-marquee .hero-signon a.button.primary:any-link {
+  background: var(--brand-red, #d71e28);
+  border: 1px solid var(--brand-red, #d71e28);
+  color: #fff;
+  border-radius: 24px;
+  padding: 10px 28px;
+}
+
+main .hero.hero-marquee .hero-signon a.button.primary:any-link:hover {
+  background: var(--brand-red-dark, #b31118);
+  color: #fff;
+}
+
+.hero-signon-enroll {
+  color: var(--text-color-subtle);
+  font-size: 15px;
+}
+
+.hero-signon-links {
+  background: var(--light-color, #f4f0ed);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero-signon-links a {
+  color: var(--text-color-subtle);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.hero-signon-links a:hover {
+  text-decoration: underline;
 }
 
 @media (width >= 768px) {
   .hero.hero-marquee {
-    min-height: 0;
-    padding: 0;
+    min-height: 480px;
+  }
+
+  .hero.hero-marquee > div:not(.hero-signon) {
+    padding: var(--gap-3xl) var(--gap-lg) var(--gap-3xl) 520px;
   }
 
   .hero.hero-marquee h1,
   .hero.hero-marquee h2 {
-    font-size: var(--heading-size-xxl);
+    font-size: 48px;
+  }
+}
+
+/* Mobile: stack the card above the promo text, image as backdrop */
+@media (width < 768px) {
+  .hero.hero-marquee {
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 0;
   }
 
-  .hero.hero-marquee > div {
-    padding: var(--gap-xl) 82px;
+  .hero.hero-marquee .hero-signon {
+    position: static;
+    transform: none;
+    width: 100%;
+    max-width: none;
+    margin: var(--gap-lg) auto 0;
+    padding: 0 var(--gap-lg);
+  }
+
+  .hero.hero-marquee > div:not(.hero-signon) {
+    padding: var(--gap-lg);
   }
 }

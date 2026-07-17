@@ -323,9 +323,8 @@ main .hero a.button.secondary:any-link:hover {
 .hero.hero-marquee img {
   display: block;
   width: 100%;
-  height: 320px;
-  object-fit: cover;
-  object-position: center;
+  height: auto;
+  object-fit: contain;
 }
 
 /* content column — centered, dark text, generous horizontal padding */

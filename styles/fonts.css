@@ -26,3 +26,27 @@
   font-stretch: 100%;
   src: url('../fonts/instrument-sans-latin.woff2') format('woff2');
 }
+
+/*
+ * Wells Fargo Sans is proprietary and cannot be bundled. Map the brand font
+ * families used throughout the stylesheet to the self-hosted Instrument Sans
+ * variable font so text renders in a consistent web font (not the raw Arial
+ * fallback). Regular -> weight 400, SemiBold -> weight 600.
+ */
+@font-face {
+  font-family: 'Wells Fargo Sans Regular';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  font-stretch: 100%;
+  src: url('../fonts/instrument-sans-latin.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Wells Fargo Sans SemiBold';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  font-stretch: 100%;
+  src: url('../fonts/instrument-sans-latin.woff2') format('woff2');
+}
